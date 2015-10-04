@@ -1,4 +1,4 @@
-/*! tablesorter (FORK) - updated 09-23-2015 (v2.23.4)*/
+/*! tablesorter (FORK) - updated 10-04-2015 (v2.23.5)*/
 /* Includes widgets ( storage,uitheme,columns,filter,stickyHeaders,resizable,saveSort ) */
 (function(factory) {
 	if (typeof define === 'function' && define.amd) {
@@ -10,7 +10,7 @@
 	}
 }(function($) {
 
-/*! TableSorter (FORK) v2.23.4 *//*
+/*! TableSorter (FORK) v2.23.5 *//*
 * Client-side table sorting with ease!
 * @requires jQuery v1.2.6+
 *
@@ -37,7 +37,7 @@
 
 			var ts = this;
 
-			ts.version = '2.23.4';
+			ts.version = '2.23.5';
 
 			ts.parsers = [];
 			ts.widgets = [];
@@ -525,19 +525,27 @@
 			}
 
 			function updateHeader(table) {
-				var index, s, $th, col,
+				var index, isDisabled, $th, col,
 					c = table.config,
 					len = c.$headers.length;
 				for ( index = 0; index < len; index++ ) {
 					$th = c.$headers.eq( index );
 					col = ts.getColumnData( table, c.headers, index, true );
 					// add 'sorter-false' class if 'parser-false' is set
-					s = ts.getData( $th, col, 'sorter' ) === 'false' || ts.getData( $th, col, 'parser' ) === 'false';
-					$th[0].sortDisabled = s;
-					$th[ s ? 'addClass' : 'removeClass' ]('sorter-false').attr('aria-disabled', '' + s);
+					isDisabled = ts.getData( $th, col, 'sorter' ) === 'false' || ts.getData( $th, col, 'parser' ) === 'false';
+					$th[0].sortDisabled = isDisabled;
+					$th[ isDisabled ? 'addClass' : 'removeClass' ]( 'sorter-false' ).attr( 'aria-disabled', '' + isDisabled );
+					// disable tab index on disabled cells
+					if ( c.tabIndex ) {
+						if ( isDisabled ) {
+							$th.removeAttr( 'tabindex' );
+						} else {
+							$th.attr( 'tabindex', '0' );
+						}
+					}
 					// aria-controls - requires table ID
 					if (table.id) {
-						if (s) {
+						if ( isDisabled ) {
 							$th.removeAttr('aria-controls');
 						} else {
 							$th.attr('aria-controls', table.id);
@@ -2710,7 +2718,7 @@
 
 })(jQuery);
 
-/*! Widget: filter - updated 9/23/2015 (v2.23.4) *//*
+/*! Widget: filter - updated 10/4/2015 (v2.23.5) *//*
  * Requires tablesorter v2.8+ and jQuery 1.7+
  * by Rob Garrison
  */
@@ -2814,8 +2822,8 @@
 		// data.filters = array of filters for all columns ( some may be undefined )
 		// data.filter = filter for the current column
 		// data.iFilter = same as data.filter, except lowercase ( if wo.filter_ignoreCase is true )
-		// data.exact = table cell text ( or parsed data if column parser enabled )
-		// data.iExact = same as data.exact, except lowercase ( if wo.filter_ignoreCase is true )
+		// data.exact = table cell text ( or parsed data if column parser enabled; may be a number & not a string )
+		// data.iExact = same as data.exact, except lowercase ( if wo.filter_ignoreCase is true; may be a number & not a string )
 		// data.cache = table cell text from cache, so it has been parsed ( & in all lower case if c.ignoreCase is true )
 		// data.cacheArray = An array of parsed content from each table cell in the row being processed
 		// data.index = column index; table = table element ( DOM )
@@ -3796,7 +3804,8 @@
 						if ( fxn === true || hasSelect ) {
 							// default selector uses exact match unless 'filter-match' class is found
 							filterMatched = data.isMatch ?
-								data.iExact.search( data.iFilter ) >= 0 :
+								// data.iExact may be a number
+								( '' + data.iExact ).search( data.iFilter ) >= 0 :
 								data.filter === data.exact;
 						} else if ( typeof fxn === 'function' ) {
 							// filter callback( exact cell content, parser normalized content,
@@ -3835,7 +3844,7 @@
 				return;
 			}
 			var len, norm_rows, rowData, $rows, $row, rowIndex, tbodyIndex, $tbody, columnIndex,
-				isChild, childRow, lastSearch, showRow, time, val, indx,
+				isChild, childRow, lastSearch, showRow, showParent, time, val, indx,
 				notFiltered, searchFiltered, query, injected, res, id, txt,
 				storedFilters = $.extend( [], filters ),
 				regex = tsf.regex,
@@ -4015,7 +4024,7 @@
 							// a match anywhere in the child row, then it will make the row visible
 							// checked here so the option can be changed dynamically
 							for ( indx = 0; indx < childRow.length; indx++ ) {
-								txt += ' ' + childRow[indx].join( '' ) || '';
+								txt += ' ' + childRow[indx].join( ' ' ) || '';
 							}
 							data.childRowText = wo.filter_childRows ?
 								( wo.filter_ignoreCase ? txt.toLowerCase() : txt ) :
@@ -4023,14 +4032,20 @@
 						}
 
 						showRow = false;
-						val = tsf.processRow( c, data, vars );
+						showParent = tsf.processRow( c, data, vars );
+						$row = rowData.$row;
+
+						// don't pass reference to val
+						val = showParent ? true : false;
 						childRow = rowData.$row.filter( ':gt( 0 )' );
 						if ( wo.filter_childRows && childRow.length ) {
-							if ( !wo.filter_childWithSibs ) {
-								// hide all child rows
-								childRow.addClass( wo.filter_filteredRow );
-							}
 							if ( wo.filter_childByColumn ) {
+								if ( !wo.filter_childWithSibs ) {
+									// hide all child rows
+									childRow.addClass( wo.filter_filteredRow );
+									// if only showing resulting child row, only include parent
+									$row = $row.eq( 0 );
+								}
 								// cycle through each child row
 								for ( indx = 0; indx < childRow.length; indx++ ) {
 									data.$row = childRow.eq( indx );
@@ -4044,13 +4059,10 @@
 									}
 								}
 							}
+							// keep parent row match even if no child matches... see #1020
+							showRow = showRow || showParent;
 						} else {
 							showRow = val;
-						}
-						$row = rowData.$row;
-						// if only showing resulting child row, only include parent
-						if ( !wo.filter_childWithSibs ) {
-							$row = $row.eq( 0 );
 						}
 						$row
 							.toggleClass( wo.filter_filteredRow, !showRow )[0]
@@ -4178,7 +4190,7 @@
 		},
 		getOptions: function( table, column, onlyAvail ) {
 			table = $( table )[0];
-			var rowIndex, tbodyIndex, len, row, cache,
+			var rowIndex, tbodyIndex, len, row, cache, indx, child, childLen,
 				c = table.config,
 				wo = c.widgetOptions,
 				arry = [];
@@ -4201,9 +4213,24 @@
 						c.parsers[column].parsed ||
 						c.$headerIndexed[column].hasClass( 'filter-parsed' ) ) {
 						arry.push( '' + cache.normalized[ rowIndex ][ column ] );
+						// child row parsed data
+						if ( wo.filter_childRows && wo.filter_childByColumn ) {
+							childLen = cache.normalized[ rowIndex ][ c.columns ].$row.length - 1;
+							for ( indx = 0; indx < childLen; indx++ ) {
+								arry.push( '' + cache.normalized[ rowIndex ][ c.columns ].child[ indx ][ column ] );
+							}
+						}
 					} else {
 						// get raw cached data instead of content directly from the cells
 						arry.push( cache.normalized[ rowIndex ][ c.columns ].raw[ column ] );
+						// child row unparsed data
+						if ( wo.filter_childRows && wo.filter_childByColumn ) {
+							childLen = cache.normalized[ rowIndex ][ c.columns ].$row.length;
+							for ( indx = 1; indx < childLen; indx++ ) {
+								child =  cache.normalized[ rowIndex ][ c.columns ].$row.eq( indx ).children().eq( column );
+								arry.push( '' + ts.getElementText( c, child, column ) );
+							}
+						}
 					}
 				}
 			}
