@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>jQuery plugin: Tablesorter 2.0</title>
@@ -71,11 +71,11 @@
 	</div>
 </div>
 
-<div id="main">
+<label for="main-nav-check" class="tooltip-right toggle-menu main-header" onclick="" title="Click to toggle the side menu">
+	<span></span>
+</label>
 
-	<label for="main-nav-check" class="tooltip-right toggle-menu main-header" onclick="" title="Click to toggle the side menu">
-		<span></span>
-	</label>
+<div id="main">
 
 	<div id="banner">
 		<h1>table<em>sorter</em> <small>(unofficial fork)</small></h1>
@@ -87,8 +87,8 @@
 		<strong>Original Author:</strong> Christian Bach<br>
 		<strong>Maintainer of this fork:</strong> Rob Garrison (Mottie)<br>
 		<strong>Version:</strong> <a class="current-version" href="https://github.com/Mottie/tablesorter/archive/master.zip">2.1+</a> (<a href="https://github.com/Mottie/tablesorter/wiki/Changes">changelog</a>)&nbsp;
-		<iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=mottie&amp;repo=tablesorter&amp;type=fork&amp;count=true" width="90" height="20" title="Fork on GitHub"></iframe>
-		<iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=mottie&amp;repo=tablesorter&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub"></iframe>
+		<iframe class="github-btn" src="https://ghbtns.com/github-btn.html?user=mottie&repo=tablesorter&type=fork&count=true" width="90" height="20" title="Fork on GitHub"></iframe>
+		<iframe class="github-btn" src="https://ghbtns.com/github-btn.html?user=mottie&repo=tablesorter&type=watch&count=true" width="100" height="20" title="Star on GitHub"></iframe>
 		<br>
 		<strong>Licence:</strong>
 		Dual licensed under <a class="external" href="http://www.opensource.org/licenses/mit-license.php">MIT</a>
@@ -137,7 +137,7 @@
 	<a id="Demo"></a>
 	<h1>Demo</h1>
 
-	<table id="tablesorter-demo" class="tablesorter">
+	<table id="tablesorter-demo" class="tablesorter-blue">
 		<thead>
 			<tr>
 				<th>Account #</th>
@@ -328,7 +328,7 @@
 		<li>Modify a sort:
 			<ul>
 				<li><a href="example-option-sort-force.html">Force a default sorting order</a> (<a href="#sortforce"><code>sortForce</code></a>)</li>
-				<li><a href="example-option-sort-append.html">Append a sort to the selected sorting order</a> (<a href="#sortappend"><code>sortAppend</code></a>)</li>
+				<li><a href="example-option-sort-append.html">Append a sort to the selected sorting order</a> (<a href="#sortappend"><code>sortAppend</code></a>; <span class="version updated">v2.24.0</span>)</li>
 				<li><a href="example-option-sort-empty.html">Sorting empty cells</a> (<a href="#emptyto"><code>emptyTo</code></a>; v2.1.11)</li>
 			</ul>
 		</li>
@@ -452,12 +452,12 @@
 		<li><a href="example-widget-align-character.html">Align Character Widget</a> (<span class="version">v2.15.8</span>; <span class="version updated">v2.19.0</span>).</li>
 		<li><a href="example-widget-build-table.html">Build table Widget</a> (<span class="version">v2.11</span>; <span class="version updated">v2.21.3</span>).</li>
 
-		<li><span class="label label-info">Beta</span> <a href="example-widget-chart.html">Chart Widget</a> (<span class="version">v2.19.0</span>).</li>
+		<li><span class="label label-info">Beta</span> <a href="example-widget-chart.html">Chart Widget</a> (<span class="version">v2.19.0</span>; <span class="version updated">v2.24.0</span>).</li>
 		<li><span class="results">&dagger;</span> <a href="example-widget-columns.html">Columns highlight widget</a> (v2.0.17)</li>
-		<li><a href="example-widget-column-selector.html">Column selector widget</a> (<span class="version">v2.15</span>; <span class="version updated">v2.23.2</span>).</li>
-		<li><a href="example-widget-editable.html">Content editable widget</a> (v2.9; <span class="version updated">v2.23.0</span>).</li>
-		<li><span class="label label-info">Beta</span> <a href="example-dragtable.html">Dragtable mod</a>  - (jQuery UI widget for column reordering [<a href="http://stackoverflow.com/a/27770224/145346">ref</a>]; <span class="version">v2.19.0</span>).</li>
-		<li><span class="results">&dagger;</span> Filter widget (<span class="version updated">v2.23.4</span>):
+		<li><a href="example-widget-column-selector.html">Column selector widget</a> (<span class="version">v2.15</span>; <span class="version updated">v2.24.0</span>).</li>
+		<li><a href="example-widget-editable.html">Content editable widget</a> (v2.9; <span class="version updated">v2.24.0</span>).</li>
+		<li><span class="label label-info">Beta</span> <a href="example-dragtable.html">Dragtable mod</a>  - (jQuery UI widget for column reordering [<a href="http://stackoverflow.com/a/27770224/145346">ref</a>]; <span class="version">v2.24.0</span>).</li>
+		<li><span class="results">&dagger;</span> Filter widget (<span class="version updated">v2.24.0</span>):
 			<ul>
 				<li><a href="example-widget-filter.html">basic</a> (v2.0.18; <span class="version updated">v2.23.5</span>)</li>
 				<li><a href="example-widget-filter-any-match.html">external option (match any column)</a> (<span class="version">v2.13.3</span>; <span class="version updated">v2.22.0</span>)</li>
@@ -473,34 +473,35 @@
 		<li><span class="label label-info">Beta</span> <a href="example-widget-formatter.html">Formatter widget</a> (<span class="version">v2.19.1</span>).</li>
 		<li>Grouping rows widget:
 			<ul>
-				<li><a href="example-widget-grouping.html">basic</a> (v2.8; <span class="version updated">v2.23.3</span>).</li>
+				<li><a href="example-widget-grouping.html">basic</a> (v2.8; <span class="version updated">v2.24.0</span>).</li>
 				<li><a href="example-widget-grouping-filter-childrows.html">Grouping + filter + child rows</a> (<span class="updated version">v2.15.12</span>)</li>
 			</ul>
 		</li>
-		<li><a href="example-widget-header-titles.html">Header titles widget</a> (v2.15.6; <span class="version updated">2.15.7</span>)</li>
-		<li><a href="example-widget-math.html">Math widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.22.0</span>).</li>
+		<li><a href="example-widget-header-titles.html">Header titles widget</a> (v2.15.6; <span class="version updated">v2.24.0</span>)</li>
+		<li><span class="label label-info">Beta</span> <a href="example-widget-lazyload.html">Lazyload widget</a> (<span class="version">v2.24.0</span>).</li>
+		<li><a href="example-widget-math.html">Math widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.24.0</span>).</li>
 		<li>
-			<a href="example-widget-output.html">Output widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.22.2</span>)
+			<a href="example-widget-output.html">Output widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.24.0</span>)
 			<br><br>
 		</li>
 
-		<li>Pager plugin (<a href="example-pager.html">basic</a> &amp; <a href="example-pager-ajax.html">ajax</a> demos; <span class="version updated">v2.23.5</span>).</li>
+		<li>Pager plugin (<a href="example-pager.html">basic</a> &amp; <a href="example-pager-ajax.html">ajax</a> demos; <span class="version updated">v2.24.0</span>).</li>
 		<li>
-			Pager widget (<a href="example-widget-pager.html">basic</a> &amp; <a href="example-widget-pager-ajax.html">ajax</a> demos) (<span class="version">v2.12</span>; <span class="version updated">v2.23.5</span>).<br>
+			Pager widget (<a href="example-widget-pager.html">basic</a> &amp; <a href="example-widget-pager-ajax.html">ajax</a> demos) (<span class="version">v2.12</span>; <span class="version updated">v2.24.0</span>).<br>
 			<br>
 		</li>
 
-		<li><a href="example-widget-print.html">Print widget</a> (<span class="version">v2.16.4</span>; <span class="version updated">v2.19.0</span>)</li>
+		<li><a href="example-widget-print.html">Print widget</a> (<span class="version">v2.16.4</span>; <span class="version updated">v2.24.0</span>)</li>
 		<li><a href="example-widget-reflow.html">Reflow widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.19.0</span>)</li>
 		<li><a href="example-widgets.html">Repeat headers widget</a> (v2.0.5; <span class="version updated">v2.19.0</span>)</li>
 		<li><span class="results">&dagger;</span> <a href="example-widget-resizable.html">Resizable columns widget</a> (v2.0.23.1; <span class="version updated">v2.22.0</span>)</li>
-		<li><span class="results">&dagger;</span> <a href="example-widget-savesort.html">Save sort widget</a> (v2.0.27)</li>
-		<li><a href="example-widget-scroller.html">Scroller widget</a> (<span class="version">v2.9</span>; <span class="version updated">v2.22.0</span>).</li>
-		<li><span class="label label-info">Beta</span> <a href="example-widget-sort-to-hash.html">Sort-to-hash widget</a> (<span class="version">v2.22.4</span>)</li>
-		<li><span class="label label-info">Beta</span> <a href="example-widget-sort-tbodies.html">Sort tbodies widget</a> (<span class="version">v2.22.2</span>).</li>
-		<li><a href="example-widget-static-row.html">Static row widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.19.1</span>).</li>
+		<li><span class="results">&dagger;</span> <a href="example-widget-savesort.html">Save sort widget</a> (v2.0.27; <span class="version updated">v2.24.0</span>)</li>
+		<li><a href="example-widget-scroller.html">Scroller widget</a> (<span class="version">v2.9</span>; <span class="version updated">v2.24.0</span>).</li>
+		<li><span class="label label-info">Beta</span> <a href="example-widget-sort-to-hash.html">Sort-to-hash widget</a> (<span class="version">v2.22.4</span>; <span class="version updated">v2.24.0</span>)</li>
+		<li><span class="label label-info">Beta</span> <a href="example-widget-sort-tbodies.html">Sort tbodies widget</a> (<span class="version">v2.22.2</span>; <span class="version updated">v2.24.0</span>).</li>
+		<li><a href="example-widget-static-row.html">Static row widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.24.0</span>).</li>
 
-		<li><span class="results">&dagger;</span> <a href="example-widget-sticky-header.html">Sticky header widget</a> (v2.0.21.1; <span class="version updated">v2.21.3</span>)</li>
+		<li><span class="results">&dagger;</span> <a href="example-widget-sticky-header.html">Sticky header widget</a> (v2.0.21.1; <span class="version updated">v2.24.0</span>)</li>
 		<li><a href="example-widget-css-sticky-header.html">Sticky header (css3) widget</a> (<span class="version">v2.14.2</span>; <span class="version updated">v2.19.1</span>).</li>
 		<li><span class="results">&dagger;</span> UITheme widget (<span class="version updated">v2.17.4</span>; <span class="version updated">v2.19.0</span>):
 			<ul>
@@ -508,6 +509,7 @@
 				<li><a href="example-widget-bootstrap-theme-v2.html">Bootstrap v2.x</a> (demo added <span class="version">v2.22.0</span>) &amp; <a href="example-widget-bootstrap-theme.html">Bootstrap v3.x</a> (v2.4)</li>
 			</ul>
 		</li>
+		<li><span class="label label-info">Beta</span> <a href="example-widget-view.html">View Widget</a> (<span class="version">v2.24.0</span>).</li>
 		<li><span class="results">&Dagger;</span> <a href="example-widget-zebra.html">Zebra stripe widget</a></li>
 	</ul>
 
@@ -520,8 +522,8 @@
 		<li><a href="example-parsers-feet-inch-fraction.html">Feet-inch-fraction parser</a> (<span class="version">v2.8</span>).</li>
 		<li><a href="example-parsers-file-type.html">File type parser</a> (<span class="version">v2.13</span>).</li>
 		<li><a href="example-parsers-ignore-articles.html">Ignore leading articles parser</a> (Ignore &quot;A&quot;, &quot;An&quot; and &quot;The&quot; in titles) (<span class="version">v2.8</span>).</li>
-		<li><a href="example-widget-grouping.html">Input/select parsers</a> (used by Grouping rows widget) (<span class="version">v2.8</span>; <span class="version updated">v2.23.0</span>).</li>
-		<li><a href="http://jsfiddle.net/Mottie/0j18Lw8r/">jQuery Globalize</a> (number &amp; date parsers; <span class="version">v2.22.0</span>).</li>
+		<li><a href="example-widget-grouping.html">Input/select parsers</a> (used by Grouping rows widget) (<span class="version">v2.8</span>; <span class="version updated">v2.24.0</span>).</li>
+		<li><a href="example-parsers-globalize.html">jQuery Globalize</a> (number &amp; date parsers; <span class="version">v2.22.0</span>; <span class="version updated">v2.24.0</span>).</li>
 		<li><a href="example-parsers-metric.html">Metric parser</a> (<span class="version">v2.8</span>).</li>
 		<li><a href="example-parsers-named-numbers.html">Named Numbers parser</a> (<span class="version">v2.18.0</span>; <span class="version updated">v2.22.0</span>).</li>
 		<li><a href="example-parsers-ip-address.html">Network (IPv4, IPv6 and MAC address parser</a> (<span class="version">v2.12</span>; <span class="version updated">v2.22.0</span>).</li>
@@ -548,7 +550,7 @@
 		<span class="label label-info">TIP!</span> Click on the link in the property column to reveal full details (or <a href="#" class="toggleAll">toggle</a>|<a href="#" class="showAll">show</a>|<a href="#" class="hideAll">hide</a> all) or double click to update the browser location.
 	</div>
 
-	<table id="options" class="tablesorter options" data-sortlist="[[0,0]]">
+	<table id="options" class="tablesorter-blue options" data-sortlist="[[0,0]]">
 		<thead>
 			<tr>
 				<th class="property">Property</th>
@@ -1270,7 +1272,7 @@ From the example function above, you'll end up with something similar to this HT
 					<ol>
 						<li><a href="#sortforce"><code>sortForce</code></a> forces the user to have this/these column(s) sorted first (null by default).</li>
 						<li><a href="#sortlist"><code>SortList</code></a> is the initial sort order of the columns.</li>
-						<li><a href="#sortappend"><code>SortAppend</code></a> is the default sort that is added to the end of the users sort selection (null by default).</li>
+						<li><a href="#sortappend"><code>SortAppend</code></a> is the default sort that is added to the end of the users sort selection (null by default; <span class="version updated">v2.24.0</span>).</li>
 					</ol>
 					The value of these sort options is an array of arrays and can include one or more columns. The format is an array of instructions for per-column sorting and direction in the format: <code>[[columnIndex, sortDirection], ... ]</code> where <code>columnIndex</code> is a zero-based index for your columns left-to-right and <code>sortDirection</code> is 0 for Ascending and 1 for Descending.  A valid argument that sorts ascending first by column 1 and then column 2 looks like: <code>[[0,0],[1,0]]</code>.
 				<pre class="prettyprint lang-js">$(function(){
@@ -1314,14 +1316,29 @@ From the example function above, you'll end up with something similar to this HT
 
 			<tr id="sortappend">
 				<td><a href="#" class="permalink">sortAppend</a></td>
-				<td>Array</td>
+				<td>Array or Object</td>
 				<td>null</td>
-				<td>Use to add an additional forced sort that will be appended to the dynamic selections by the user.
+				<td>Use to add an additional forced sort that will be appended to the dynamic selections by the user (<span class="version updated">v2.24.0</span>).
 					<div class="collapsible">
 					<br>
 					For example, can be used to sort people alphabetically after some other user-selected sort that results in rows with the same value like dates or money due. It can help prevent data from appearing as though it has a random secondary sort.<br>
-				<br>
-				The value contains an array of instructions for per-column sorting and direction in the format: <code>[[columnIndex, sortDirection], ... ]</code> where <code>columnIndex</code> is a zero-based index for your columns left-to-right and sortDirection is 0 for Ascending and 1 for Descending.  A valid argument that sorts ascending first by column 1 and then column 2 looks like: <code>[[0,0],[1,0]]</code>. Please see <a href="#sortforce"><code>sortForce</code></a> for more details on other sort order options.
+					<pre class="prettyprint lang-js">$(function(){
+  $("table").tablesorter({
+    sortAppend : [[1,0], [2,0]] // always append sorting of 2nd and 3rd column
+  });
+});</pre>
+					The value contains an array of instructions for per-column sorting and direction in the format: <code>[[columnIndex, sortDirection], ... ]</code> where <code>columnIndex</code> is a zero-based index for your columns left-to-right and sortDirection is 0 for Ascending and 1 for Descending.  A valid argument that sorts ascending first by column 1 and then column 2 looks like: <code>[[0,0],[1,0]]</code>. Please see <a href="#sortforce"><code>sortForce</code></a> for more details on other sort order options.
+					<p>In <span class="version updated">v2.24.0</span>, the <code>sortAppend</code> option now accepts an object containing column indexes.</p>
+					<p>Also, the sort direction can be set using "a" (ascending), "d" (descending), "n" (next), "s" (same) &amp; "o" (opposite):</p>
+					<pre class="prettyprint lang-js">$(function(){
+  $("table").tablesorter({
+    sortAppend: {
+      0 : [[ 1,'a' ]], // always apply ascending sort
+      2 : [[ 3,'o' ]], // sort "o"pposite of column 2 direction
+      4 : [[ 5,'s' ], [ 0,'s' ]]  // sort "s"ame as column 4 direction
+    }
+  });
+});</pre>
 				</div>
 				</td>
 				<td><a href="example-option-sort-append.html">Example</a></td>
@@ -2129,7 +2146,7 @@ $(function(){
 	<a id="Widget-options"></a>
 	<h1>Widget &amp; Pager Options</h1>
 
-	<table class="tablesorter compatibility" data-sortlist="[[0,0]]">
+	<table class="tablesorter-blue compatibility" data-sortlist="[[0,0]]">
 		<thead>
 			<tr><th>Widget Priority</th><th>Name</th><th>Requires jQuery</th><th>Limiting function</th></tr>
 		</thead>
@@ -2161,7 +2178,7 @@ $(function(){
 		<span class="label label-info">TIP!</span> Click on the link in the property column to reveal full details (or <a href="#" class="toggleAll">toggle</a>|<a href="#" class="showAll">show</a>|<a href="#" class="hideAll">hide</a> all) or double click to update the browser location.
 	</div>
 
-	<table id="widget-options" class="tablesorter options" data-sortlist="[[0,0]]">
+	<table id="widget-options" class="tablesorter-blue options" data-sortlist="[[0,0]]">
 		<thead>
 			<tr>
 				<th class="property">Property</th>
@@ -2347,8 +2364,15 @@ $(function(){
 					<div class="collapsible"><br>
 						When the filter row is built, each table cell (<code>&lt;td&gt;</code>) will get the class name from this option.
 						<ul>
-							<li>If this option is a plain string, all filter row cells will get the text applied as a class name.</li>
-							<li>If this option is an array, then each filter row cell will get the text from the associate array element applied as a class name.</li>
+							<li>If this option is a plain string, all filter row cells will get the text applied as a class name.
+								<pre class="prettyprint lang-js">// "table-filter" class added to all filter row td's
+filter_cssFilter : 'table-filter'</pre>
+							</li>
+							<li>If this option is an array, then each filter row cell will get the text from the associate array element applied as a class name.
+								<pre class="prettyprint lang-css">.hidden { display: none; }</pre>
+								<pre class="prettyprint lang-js">// hiding second & fourth columns using associated css
+filter_cssFilter : [ '', 'hidden', '', 'hidden' ]</pre>
+							</li>
 						</ul>
 						<p>Use the <a href="#widget-filter-cellfilter"><code>filter_cellFilter</code></a> option to add an extra css class name as follows:</p>
 						<pre class="prettyprint lang-js">$(function(){
@@ -2374,7 +2398,7 @@ $(function(){
 					<div class="collapsible"><br>
 						As of v2.15, this option can also contain an array of class names that are to be applied to input filters.<br>
 						<br>
-						Changed to empty string in v2.11, as the <code>&quot;tablesorter-filter&quot;</code> class will always be added to the filter; this option now contains any additional class names to add.
+						Changed default to an empty string in v2.11, as the <code>&quot;tablesorter-filter&quot;</code> class will always be added to the filter; this option now contains any additional class names to add.
 						<p>Use the <a href="#widget-filter-cssfilter"><code>filter_cssFilter</code></a> option to add an extra css class name as follows:</p>
 						<pre class="prettyprint lang-js">$(function(){
   $("table").tablesorter({
@@ -4593,7 +4617,7 @@ $.extend($.tablesorter.themes.jui, {
 		<span class="label label-info">TIP!</span> Click on the link in the method column to reveal full details (or <a href="#" class="toggleAll">toggle</a>|<a href="#" class="showAll">show</a>|<a href="#" class="hideAll">hide</a> all) or double click to update the browser location.
 	</div>
 
-	<table id="method" class="tablesorter options" data-sortlist="[[0,0]]">
+	<table id="method" class="tablesorter-blue options" data-sortlist="[[0,0]]">
 		<thead>
 			<tr>
 				<th>Method</th>
@@ -5120,11 +5144,13 @@ $('table').trigger( 'search', [['', '', '', '', 'orange']] ); // find orange in 
 		<tbody>
 			<tr id="pagesize">
 				<td><a href="#" class="permalink">pageSize</a></td>
-				<td>Trigger the pager to change the page size (v2.7.4).
+				<td>Trigger the pager to change the page size (v2.7.4; <span class="version updated">v2.24.0</span>).
 					<div class="collapsible">
 						<pre class="prettyprint lang-js">$(function(){
   $('table').trigger('pageSize', 15);
-});</pre></div>
+});</pre>
+						In <span class="version updated">v2.24.0</span>, this option will now accept "all" as a setting, and in turn display all rows.
+					</div>
 				</td>
 				<td></td>
 			</tr>
@@ -5142,13 +5168,15 @@ $('table').trigger( 'search', [['', '', '', '', 'orange']] ); // find orange in 
 			</tr>
 			<tr id="pageandsize">
 				<td><a href="#" class="permalink">pageAndSize</a></td>
-				<td>Trigger the pager to change the current page &amp; size (<span class="version">v2.19.0</span>).
+				<td>Trigger the pager to change the current page &amp; size (<span class="version">v2.19.0</span>; ; <span class="version updated">v2.24.0</span>).
 					<div class="collapsible">
 						<br>
 						If no value is passed, the pager will reset to page 1 with the original pager size setting; otherwise, pass a "one-based" index of the desired page and the pager size as an array
 						<pre class="prettyprint lang-js">$(function(){
   $('table').trigger('pageAndSize', [ 2, 20 ]); // pass a one-based page index & page size
-});</pre></div>
+});</pre>
+					In <span class="version updated">v2.24.0</span>, this option will now accept "all" as a page size setting, and in turn display all rows; the page number will be force to page one.
+					</div>
 				</td>
 				<td></td>
 			</tr>
@@ -5227,7 +5255,7 @@ $('table').trigger( 'search', [['', '', '', '', 'orange']] ); // find orange in 
 		<span class="label label-info">TIP!</span> Click on the link in the event column to reveal full details (or <a href="#" class="toggleAll">toggle</a>|<a href="#" class="showAll">show</a>|<a href="#" class="hideAll">hide</a> all) or double click to update the browser location.
 	</div>
 
-	<table id="event" class="tablesorter options" data-sortlist="[[0,0]]">
+	<table id="event" class="tablesorter-blue options" data-sortlist="[[0,0]]">
 		<thead>
 			<tr>
 				<th>Event</th>
@@ -5338,6 +5366,27 @@ $('table').trigger( 'search', [['', '', '', '', 'orange']] ); // find orange in 
 
     .bind('updateComplete', function(e, table) {
       // do something after the table has been altered;
+    });
+
+});</pre></div>
+				</td>
+				<td></td>
+			</tr>
+
+			<tr id="tablesorterready">
+				<td><a href="#" class="permalink">tablesorter-ready</a></td>
+				<td>This event fires after tablesorter has complete applying all widgets and is ready for its next action (<span class="version">v2.24.0</span>).
+					<div class="collapsible">
+						This event occurs after an "updateComplete" and "pagerComplete" event. There may be some other table interaction if a widget includes any <code>setTimeout</code> functions.
+						<pre class="prettyprint lang-js">$(function(){
+
+  // initialize the tablesorter plugin
+  $('table')
+    .tablesorter()
+    // bind to sort events
+
+    .bind('tablesorter-ready', function(e, table) {
+      // do something after tablesorter has finished interacting with the table;
     });
 
 });</pre></div>
@@ -5617,7 +5666,7 @@ $('table').trigger( 'search', [['', '', '', '', 'orange']] ); // find orange in 
 		<span class="label label-info">TIP!</span> Click on the link in the variable column to reveal full details (or <a href="#" class="toggleAll">toggle</a>|<a href="#" class="showAll">show</a>|<a href="#" class="hideAll">hide</a> all) or double click to update the browser location.
 	</div>
 
-	<table class="api" data-sortlist="[[0,0]]">
+	<table class="api tablesorter-blue" data-sortlist="[[0,0]]">
 		<thead>
 			<tr>
 				<th class="setwidth">Variable</th>
@@ -6408,7 +6457,7 @@ $.each( p.cacheIndex, function(i, v) {
 		<h4>Functions</h4>
 		<span class="label label-info">TIP!</span> Click on the link in the function column to reveal full details (or <a href="#" class="toggleAll">toggle</a>|<a href="#" class="showAll">show</a>|<a href="#" class="hideAll">hide</a> all) or double click to update the browser location.
 	</div>
-	<table id="functions" class="api" data-sortlist="[[0,0]]">
+	<table id="functions" class="api tablesorter-blue" data-sortlist="[[0,0]]">
 		<thead>
 			<tr>
 				<th class="setwidth">Function</th>
@@ -6832,15 +6881,16 @@ textExtractionFunction = $.tablesorter.getColumnData( table, table.config.textEx
 
 			<tr id="function-getcolumntext">
 				<td><a href="#" class="permalink">getColumnText</a></td>
-				<td>This utility function returns the entire column text (raw and parsed) as well as other data (<span class="version">v2.21.4</span>).
+				<td>This utility function returns the entire column text (raw and parsed) as well as other data (<span class="version">v2.21.4</span>; <span class="updated version">v2.24.0</span>).
 					<div class="collapsible">
 					<br>
 						Use it as follows:
-						<pre class="prettyprint lang-js">$.tablesorter.getColumnText( table, column, callback );</pre>
+						<pre class="prettyprint lang-js">$.tablesorter.getColumnText( table, column, callback, rowFilter );</pre>
 						<ul>
 							<li><code>table</code> - table DOM element (or jQuery object).</li>
 							<li><code>column</code> - zero-based column index or <code>'all'</code>.</li>
 							<li><code>callback</code> - callback function that is called while obtaining data for each cell within the specified column.</li>
+							<li><code>rowFilter</code> - can be a jQuery selector, function or element to allow targeting specific rows (e.g. <code>":visible"</code> or <code>":not(.child-row)"</code>); this parameter is used in a jQuery <code><a class="external" href="http://api.jquery.com/is/">.is()</a></code> function (<span class="version">v2.24.0</span>).</li>
 						</ul>
 						When using the callback, there is only one argument (object) passed to this function; it contains the following:
 						<ul>
@@ -6876,6 +6926,16 @@ $.tablesorter.getColumnText( table, 3, function( data ) {
 						<pre class="prettyprint lang-js">var table = $('table')[0],
   // targeting the 4th column (zero-based index)
   columnText = $.tablesorter.getColumnText( table, 3 );
+  // columnText = {
+  //   raw    : [ 'cell1', 'cell2', ..., 'celln' ],
+  //   parsed : [ 'cell1', 'cell2', ..., 'celln' ],
+  //   $cell  : [ $cell1,  $cell2,  ..., $celln  ]
+  // }
+</pre>
+						When using the filter widget, you can ignore filtered rows using the following code:
+						<pre class="prettyprint lang-js">var table = $('table')[0],
+  // targeting the 4th column (zero-based index); callback function is an empty string & therefore ignored
+  columnText = $.tablesorter.getColumnText( table, 3, '', ':not(.filtered)' );
   // columnText = {
   //   raw    : [ 'cell1', 'cell2', ..., 'celln' ],
   //   parsed : [ 'cell1', 'cell2', ..., 'celln' ],
@@ -7094,8 +7154,8 @@ arry = $.tablesorter.filter.processOptions( $table, column, array );
 len = arry.length;
 
 // build options
-for ( index = 0; index < len; index++ ) {
-	opts += '<option value="' + array[ index ] + '">' + array[ index ] + '</option>';
+for ( index = 0; index &lt; len; index++ ) {
+	opts += '&lt;option value="' + array[ index ] + '"&gt;' + array[ index ] + '&lt;/option&gt;';
 }
 $('select.external').html( opts );</pre>
 						<p>Please be aware that this function does not process the array, so the array may contain duplicates and will not be sorted.</p>

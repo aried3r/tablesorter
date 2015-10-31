@@ -225,6 +225,13 @@
 		}
 	}
 
+	// update stickyHeader when menu closes
+	$('#main-nav-check').bind('change', function(){
+		setTimeout(function(){
+			$(window).scroll();
+		}, 350); // transition animation 300ms
+	});
+
 	$(window).bind('load', function(){
 		if ($('#root').length) {
 			$(window).bind('hashchange', function(){
@@ -250,7 +257,7 @@
 			});
 		});
 
-		$('.toggleparsedvalue').on('click', function(){
+		$('.toggleparsedvalue').bind('click', function(){
 			$('.val').toggleClass('hidden');
 			return false;
 		});

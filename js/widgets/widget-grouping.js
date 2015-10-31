@@ -1,4 +1,4 @@
-/*! Widget: grouping - updated 9/1/2015 (v2.23.3) *//*
+/*! Widget: grouping - updated 10/31/2015 (v2.24.0) *//*
  * Requires tablesorter v2.8+ and jQuery 1.7+
  * by Rob Garrison
  */
@@ -38,28 +38,62 @@
 				return txt ? (txt + ' ').substring(0, num) : '';
 			},
 			date : function(c, $column, txt, part, group){
-				var wo = c.widgetOptions,
-					time = new Date(txt || ''),
-					hours = time.getHours();
-				return part === 'year' ? time.getFullYear() :
-					part === 'month' ? wo.group_months[time.getMonth()] :
-					part === 'monthyear' ?  wo.group_months[time.getMonth()] + ' ' + time.getFullYear() :
-					part === 'day' ? wo.group_months[time.getMonth()] + ' ' + time.getDate() :
-					part === 'week' ? wo.group_week[time.getDay()] :
-					part === 'time' ? ('00' + (hours > 12 ? hours - 12 : hours === 0 ? hours + 12 : hours)).slice(-2) + ':' +
-						('00' + time.getMinutes()).slice(-2) + ' ' + ('00' + wo.group_time[hours >= 12 ? 1 : 0]).slice(-2) :
-					wo.group_dateString(time);
+				var year, month,
+					wo = c.widgetOptions,
+					time = new Date(txt || '');
+
+				// check for valid date
+				if ( time instanceof Date && isFinite( time ) ) {
+					year = time.getFullYear();
+					month = ts.grouping.findMonth( wo, time.getMonth() );
+					return part === 'year' ? year :
+						part === 'month' ? month :
+						part === 'monthyear' ?  month + ' ' + year :
+						part === 'day' ? month + ' ' + time.getDate() :
+						part === 'week' ? ts.grouping.findWeek( wo, time.getDay() ) :
+						part === 'time' ? ts.grouping.findTime( wo, time ) :
+						wo.group_dateString( time, c, $column );
+				} else {
+					return wo.group_dateInvalid;
+				}
 			}
+		},
+
+		// group date type functions to allow using this widget with Globalize
+		findMonth : function( wo, month ) {
+			// CLDR returns an object { 1: "Jan", 2: "Feb", 3: "Mar", ..., 12: "Dec" }
+			return wo.group_months[ month + ( ( wo.group_months[0] || '' ) === '' ? 1 : 0 ) ];
+		},
+		findWeek : function( wo, day ) {
+			if ( $.isArray( wo.group_week ) ) {
+				return wo.group_week[ day ];
+			} else if ( !$.isEmptyObject( wo.group_week ) ) {
+				// CLDR returns { sun: "Sun", mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", ... }
+				var cldrWeek = [ 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ];
+				return wo.group_week[ cldrWeek[ day ] ];
+			}
+		},
+		findTime : function( wo, time ) {
+			var suffix,
+				h = time.getHours(),
+				period = h >= 12 ? 1 : 0,
+				// CLDR returns { am: "AM", pm: "PM", ... }
+				isObj = wo.group_time.am && wo.group_time.pm,
+				hours = ( '00' + ( wo.group_time24Hour && h > 12 ? h - 12 : wo.group_time24Hour && h === 0 ? h + 12 : h ) ).slice(-2),
+				min = ( '00' + time.getMinutes() ).slice(-2);
+			suffix = wo.group_time[ isObj ? [ 'am', 'pm' ][ period ] : period ];
+			return hours + ':' + min + ( wo.group_time24Hour ? '' : ' ' + ( suffix || '' ) );
 		},
 
 		update : function(table, c, wo){
 			if ($.isEmptyObject(c.cache)) { return; }
-			var rowIndex, tbodyIndex, currentGroup, $rows, groupClass, grouping, norm_rows, saveName, direction,
+			var rowIndex, tbodyIndex, currentGroup, $row, groupClass, grouping, norm_rows, saveName, direction, end,
+				hasPager = ts.hasWidget( table, 'pager' ),
 				hasSort = typeof c.sortList[0] !== 'undefined',
 				group = '',
 				groupIndex = 0,
 				savedGroup = false,
-				column = typeof wo.group_forceColumn[0] !== 'undefined' ?
+				column = $.isArray( wo.group_forceColumn ) && typeof wo.group_forceColumn[0] !== 'undefined' ?
 					( wo.group_enforceSort && !hasSort ? -1 : wo.group_forceColumn[0] ) :
 					( hasSort ? c.sortList[0][0] : -1 );
 			c.$table
@@ -94,9 +128,11 @@
 				for (tbodyIndex = 0; tbodyIndex < c.$tbodies.length; tbodyIndex++) {
 					norm_rows = c.cache[tbodyIndex].normalized;
 					group = ''; // clear grouping across tbodies
-					$rows = c.$tbodies.eq(tbodyIndex).children('tr').not('.' + c.cssChildRow);
-					for (rowIndex = 0; rowIndex < $rows.length; rowIndex++) {
-						if ( $rows.eq(rowIndex).is(':visible') ) {
+					rowIndex = hasPager ? c.pager.startRow - 1 : 0;
+					end = hasPager ? c.pager.endRow : norm_rows.length;
+					for ( ; rowIndex < end; rowIndex++ ) {
+						$row = norm_rows[ rowIndex ][ c.columns ].$row;
+						if ( $row.is(':visible') ) {
 							// fixes #438
 							if (ts.grouping.types[grouping[1]]) {
 								currentGroup = norm_rows[rowIndex] ?
@@ -112,7 +148,7 @@
 									if ($.isFunction(wo.group_formatter)) {
 										currentGroup = wo.group_formatter((currentGroup || '').toString(), column, table, c, wo) || currentGroup;
 									}
-									$rows.eq(rowIndex).before('<tr class="group-header ' + c.selectorRemove.slice(1) +
+									$row.before('<tr class="group-header ' + c.selectorRemove.slice(1) +
 										'" unselectable="on" ' + ( c.tabIndex ? 'tabindex="0" ' : '' ) + 'data-group-index="' +
 										( groupIndex++ ) + '"><td colspan="' + c.columns + '">' +
 										( wo.group_collapsible ? '<i/>' : '' ) +
@@ -236,6 +272,12 @@
 			group_months      : [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
 			group_week        : [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ],
 			group_time        : [ 'AM', 'PM' ],
+
+			// use 12 vs 24 hour time
+			group_time24Hour  : false,
+			// group header text added for invalid dates
+			group_dateInvalid : 'Invalid Date',
+
 			// this function is used when 'group-date' is set to create the date string
 			// you can just return date, date.toLocaleString(), date.toLocaleDateString() or d.toLocaleTimeString()
 			// reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#Conversion_getter
