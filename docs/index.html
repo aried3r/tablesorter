@@ -457,7 +457,7 @@
 		<li><a href="example-widget-column-selector.html">Column selector widget</a> (<span class="version">v2.15</span>; <span class="version updated">v2.24.0</span>).</li>
 		<li><a href="example-widget-editable.html">Content editable widget</a> (v2.9; <span class="version updated">v2.24.0</span>).</li>
 		<li><span class="label label-info">Beta</span> <a href="example-dragtable.html">Dragtable mod</a>  - (jQuery UI widget for column reordering [<a href="http://stackoverflow.com/a/27770224/145346">ref</a>]; <span class="version">v2.24.0</span>).</li>
-		<li><span class="results">&dagger;</span> Filter widget (<span class="version updated">v2.24.0</span>):
+		<li><span class="results">&dagger;</span> Filter widget (<span class="version updated">v2.24.3</span>):
 			<ul>
 				<li><a href="example-widget-filter.html">basic</a> (v2.0.18; <span class="version updated">v2.23.5</span>)</li>
 				<li><a href="example-widget-filter-any-match.html">external option (match any column)</a> (<span class="version">v2.13.3</span>; <span class="version updated">v2.22.0</span>)</li>
@@ -494,7 +494,7 @@
 		<li><a href="example-widget-print.html">Print widget</a> (<span class="version">v2.16.4</span>; <span class="version updated">v2.24.1</span>)</li>
 		<li><a href="example-widget-reflow.html">Reflow widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.19.0</span>)</li>
 		<li><a href="example-widgets.html">Repeat headers widget</a> (v2.0.5; <span class="version updated">v2.19.0</span>)</li>
-		<li><span class="results">&dagger;</span> <a href="example-widget-resizable.html">Resizable columns widget</a> (v2.0.23.1; <span class="version updated">v2.22.0</span>)</li>
+		<li><span class="results">&dagger;</span> <a href="example-widget-resizable.html">Resizable columns widget</a> (v2.0.23.1; <span class="version updated">v2.24.3</span>)</li>
 		<li><span class="results">&dagger;</span> <a href="example-widget-savesort.html">Save sort widget</a> (v2.0.27; <span class="version updated">v2.24.0</span>)</li>
 		<li><a href="example-widget-scroller.html">Scroller widget</a> (<span class="version">v2.9</span>; <span class="version updated">v2.24.0</span>).</li>
 		<li><span class="label label-info">Beta</span> <a href="example-widget-sort-to-hash.html">Sort-to-hash widget</a> (<span class="version">v2.22.4</span>; <span class="version updated">v2.24.1</span>)</li>
@@ -7235,7 +7235,7 @@ $.tablesorter.getFilters( $('table') );</pre>
 
 			<tr id="function-setfilters">
 				<td><a href="#" class="permalink">setFilters</a></td>
-				<td>This filter widget function allows setting of the filters; include a <code>true</code> boolean to actually apply the search (<span class="version">v2.9</span>; <span class="version updated">v2.16</span>):
+				<td>This filter widget function allows setting of the filters; include a <code>true</code> boolean to actually apply the search (<span class="version">v2.9</span>; <span class="version updated">v2.24.3</span>):
 					<div class="collapsible"><br>
 						Access it as follows:
 						<pre class="prettyprint lang-js">$.tablesorter.setFilters(table, filter, apply);</pre>
@@ -7246,12 +7246,12 @@ $.tablesorter.getFilters( $('table') );</pre>
 						</ul>
 						Use this function as follows:<br>
 						<pre class="prettyprint lang-js">// update filters, but don't apply the search
-$.tablesorter.setFilters( $('table'), [ '', '', '', '', '', '2?%' ] );
+$.tablesorter.setFilters( $('table'), [ '', '', '', '', '', '2?%' ], false );
 
-// update filters, AND apply the search
-$.tablesorter.setFilters( $('table'), [ '', '', '', '', '', '2?%' ], true ); // this will now use the search method</pre>
+// update filters, AND apply the search (apply is undefined; defaults to true in v2.24.3+)
+$.tablesorter.setFilters( $('table'), [ '', '', '', '', '', '2?%' ] ); // this will now use the search method</pre>
 						This function returns <code>true</code> if the filters were sucessfully applied, or <code>false</code> if the table does not have a filter row.<br>
-						<br>
+						<p>In <span class="version updated">v2.24.3</span>, if the <code>apply</code> parameter is left undefined, it will now default to <code>true</code>.</p>
 						As of <span class="version updated">v2.15</span>, this function will also set values in any external filters (set either by the <a href="#filter-external"><code>filter_external</code> option</a> or using the <a href="#function-bindsearch"><code>bindSearch</code> function</a>). An additional search parameter can  be included to match any column, but please include an external input with <code>data-column="all"</code> using the <code>bindSearch</code> function so your users will know that a search has been applied.<br>
 						<br>
 						Also, changed is that when a <code>true</code> value is passed as a third parameter, the search is forced to refresh on the table; otherwise, if the filters set in the search exactly match the previous search, it would be ignored - this was added to prevent numerous ajax calls with exactly the same search or sort parameters (when using the pager).
