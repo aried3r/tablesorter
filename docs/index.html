@@ -458,7 +458,7 @@
 		<li><a href="example-widget-column-selector.html">Column selector widget</a> (<span class="version">v2.15</span>; <span class="version updated">v2.25.1</span>).</li>
 		<li><a href="example-widget-editable.html">Content editable widget</a> (v2.9; <span class="version updated">v2.25.5</span>).</li>
 		<li><span class="label label-info">Beta</span> <a href="example-dragtable.html">Dragtable mod</a>  - (jQuery UI widget for column reordering [<a href="http://stackoverflow.com/a/27770224/145346">ref</a>]; <span class="version">v2.24.0</span>).</li>
-		<li><span class="results">&dagger;</span> Filter widget (<span class="version updated">v2.25.5</span>):
+		<li><span class="results">&dagger;</span> Filter widget (<span class="version updated">v2.25.6</span>):
 			<ul>
 				<li><a href="example-widget-filter.html">basic</a> (v2.0.18; <span class="version updated">v2.25.5</span>).</li>
 				<li><a href="example-widget-filter-any-match.html">external option (match any column)</a> (<span class="version">v2.13.3</span>; <span class="version updated">v2.22.0</span>).</li>
@@ -480,7 +480,7 @@
 			</ul>
 		</li>
 		<li><a href="example-widget-header-titles.html">Header titles widget</a> (v2.15.6; <span class="version updated">v2.24.4</span>).</li>
-		<li><span class="label label-info">Beta</span> <a href="example-widget-lazyload.html">Lazyload widget</a> (<span class="version">v2.24.0</span>).</li>
+		<li><span class="label label-info">Beta</span> <a href="example-widget-lazyload.html">Lazyload widget</a> (<span class="version">v2.24.0</span>; <span class="version updated">v2.25.6</span>).</li>
 		<li><a href="example-widget-math.html">Math widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.25.5</span>).</li>
 		<li>
 			<a href="example-widget-output.html">Output widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.25.2</span>).
@@ -1508,7 +1508,11 @@ From the example function above, you'll end up with something similar to this HT
 				<td>&quot;default&quot;</td>
 				<td>This option will add a theme css class name to the table <code>&quot;tablesorter-{theme}&quot;</code> for styling (v2.4; <span class="version updated">v2.18.0</span>).
 					<div class="collapsible">
-						<br>When changing this theme option (the actual theme name is inside parentheses), make sure that the appropriate css theme file has also been loaded. Included theme files include:
+						<br>
+						<span class="label alert">*NOTE*</span> If creating a custom theme file, make sure to include a filter definition to hide filtered out rows:
+						<pre class="prettyprint lang-css">.filtered { display: none; }</pre>
+						<p><span class="label label-info">Note</span> the <code>.filtered</code> class can be modified using the <a href="#widget-filter-filteredrow"><code>filter_filteredRow</code> option</a>.</p>
+						When changing this theme option (the actual theme name is inside parentheses), make sure that the appropriate css theme file has also been loaded. Default theme files include:
 						<a href="themes.html" target="_blank" title="open themes in a new window">see all themes</a><br>
 						<iframe style="width:100%;height:300px;" src="themes.html"></iframe>
 						<hr>
@@ -1881,7 +1885,7 @@ $(function(){
       filter_excludeFilter : {},
       // jQuery selector string (or jQuery object) of external search inputs
       filter_external      : '',
-      // class added to filtered rows; needed by pager plugin
+      // class added to filtered rows; define in css with "display:none" to hide the filtered-out rows
       filter_filteredRow   : 'filtered',
       // add custom filter elements to the filter row
       filter_formatter     : null,
@@ -2604,11 +2608,15 @@ filter_cssFilter : [ '', 'hidden', '', 'hidden' ]</pre>
 			</tr>
 
 			<tr id="widget-filter-filteredrow">
-				<td><span class="permalink">filter_filteredRow</span></td>
+				<td><a href="#" class="permalink">filter_filteredRow</a></td>
 				<td>String</td>
 				<td>&quot;filtered&quot;</td>
 				<td>
 					Filter widget: This is the class name applied to all rows that do not match the filter (hidden rows); used by pager plugin (<span class="version">v2.10</span>).
+					<div class="collapsible">
+						<br>
+						<span class="label alert">*NOTE*</span> If creating a custom theme, make sure to include this definition (set to <code>display:none</code> or the filter widget will appear to be broken!
+					</div>
 				</td>
 				<td></td>
 			</tr>
@@ -5298,6 +5306,25 @@ $('table').trigger( 'search', [['', '', '', '', 'orange']] ); // find orange in 
     return false;
 });</pre>
 					This method is used by the <a href="#widget-filter-reset"><code>filter_reset</code> option</a> when defined.
+					</div>
+				</td>
+				<td><a href="example-widget-filter.html">Example</a></td>
+			</tr>
+
+			<tr id="filterresetsaved">
+				<td><a href="#" class="permalink">filterResetSaved</a></td>
+				<td>filter: Make the filter widget reset any saved searches (<span class="version">v2.25.6</span>).
+					<div class="collapsible"><br>
+						Use this as follows:
+						<pre class="prettyprint lang-js">$(function(){
+  // this is the same code that the "filter_reset" element runs to clear out the filters.
+  $('button').click(function(){
+    $('#myTable').trigger('filterResetSaved');
+    return false;
+});</pre>
+						This is the equivalent of executing this function:
+						<pre class="prettyprint lang-js">// clear the current table stored filters
+$.tablesorter.storage( $('#myTable'), 'tablesorter-filters', '' );</pre>
 					</div>
 				</td>
 				<td><a href="example-widget-filter.html">Example</a></td>

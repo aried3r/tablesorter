@@ -72,6 +72,8 @@ If you would like to contribute, please...
 
 ### Questions?
 
+[![irc-image]][irc-url] [![gitter-image]][gitter-url] [![stackoverflow-image]][stackoverflow-url]
+
 * Check the [FAQ](//github.com/Mottie/tablesorter/wiki/FAQ) page.
 * Search the [main documentation](//mottie.github.io/tablesorter/docs/) (click the menu button in the upper left corner).
 * Search the [issues](//github.com/Mottie/tablesorter/issues) to see if the question or problem has been brought up before, and hopefully resolved.
@@ -88,9 +90,33 @@ If you would like to contribute, please...
 [zenhub-url]: https://zenhub.io
 [zenhub-image]: https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png
 
+[irc-url]: https://www.irccloud.com/#!/ircs://irc.freenode.net:6697/%23tablesorter
+[irc-image]: https://img.shields.io/badge/irc-%23tablesorter-yellowgreen.svg
+[gitter-url]: https://gitter.im/Mottie/tablesorter
+[gitter-image]: https://img.shields.io/badge/GITTER-join%20chat-yellowgreen.svg
+[stackoverflow-url]: http://stackoverflow.com/questions/tagged/tablesorter
+[stackoverflow-image]: https://img.shields.io/badge/stackoverflow-tablesorter-blue.svg
+
 ### Recent Changes
 
 View the [complete change log here](//github.com/Mottie/tablesorter/wiki/Changes).
+
+#### <a name="v2.25.6">Version 2.25.6</a> (3/18/2016)
+
+* Core:
+  * Add debug warning when widget not found.
+  * Add debug warning when widget is added more than once.
+* Docs:
+  * More notes added about including `.filter { display: none; }` in custom themes. See [issue #1172](https://github.com/Mottie/tablesorter/issues/1172).
+  * Add support badges to readme.
+* Filter:
+  * Add `filterResetSaved` method. See [issue #1173](https://github.com/Mottie/tablesorter/issues/1173).
+  * Update cache when `delayInit` set. Fixes [issue #1180](https://github.com/Mottie/tablesorter/issues/1180).
+* Lazyload:
+  * Trigger lazyload after filtering. Fixes [issue #1169](https://github.com/Mottie/tablesorter/issues/1169).
+  * Change `skip_invisible` option default to `true`.
+* Grunt:
+  * Update dependencies.
 
 #### <a name="v2.25.5">Version 2.25.5</a> (3/1/2016)
 
