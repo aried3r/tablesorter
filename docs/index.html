@@ -461,21 +461,22 @@
 		<li><span class="results">&dagger;</span> Filter widget (<span class="version updated">v2.25.9</span>):
 			<ul>
 				<li><a href="example-widget-filter.html">basic</a> (v2.0.18; <span class="version updated">v2.25.5</span>).</li>
-				<li><a href="example-widget-filter-any-match.html">external option (match any column)</a> (<span class="version">v2.13.3</span>; <span class="version updated">v2.22.0</span>).</li>
+				<li><a href="example-widget-filter-any-match.html">external option (match any column)</a> (<span class="version">v2.13.3</span>; <span class="version updated">v2.26.2</span>).</li>
 				<li><a href="example-widget-filter-external-inputs.html">external inputs</a> (<span class="version">v2.14</span>; <span class="version updated">v2.18.0</span>).</li>
 				<li><a href="example-widget-filter-custom.html">custom filter functions</a> (v2.3.6; <span class="version updated">v2.22.0</span>).</li>
 				<li><a href="example-widget-filter-custom-search.html">custom search types</a> (<span class="version">v2.17.5</span>; <span class="version updated">v2.22.0</span>).</li>
 				<li><a href="example-widget-filter-custom-search2.html">custom search type (example #2: date range)</a> (<span class="version">v2.19.1</span>; <span class="version updated">v2.24.6</span>).</li>
 				<li><a href="example-widget-filter-childrows.html">child rows</a> (<span class="version">v2.23.4</span>).</li>
 				<li>formatter: <a href="example-widget-filter-formatter-1.html">jQuery UI widgets</a> and <a href="example-widget-filter-formatter-2.html">HTML5 Elements</a> (v2.7.7; <span class="version updated">v2.17.5</span>).</li>
-				<li>formatter: <a href="example-widget-filter-formatter-select2.html">select2</a> (<span class="version">v2.16.0</span>; <span class="version updated">v2.21.3</span>).</li>
+				<li>formatter: <a href="example-widget-filter-formatter-select2.html">select2 v3</a> (<span class="version">v2.16.0</span>; <span class="version updated">v2.26.2</span>).</li>
+				<li>formatter: select2 v4 (TO DO)</li>
 				<li><a href="example-widget-filter-selectmenu.html">Using jQuery UI Selectmenu</a> (<span class="version">v2.24.4</span>).</li>
 			</ul>
 		</li>
 		<li><span class="label label-info">Beta</span> <a href="example-widget-formatter.html">Formatter widget</a> (<span class="version">v2.19.1</span>).</li>
 		<li>Grouping rows widget:
 			<ul>
-				<li><a href="example-widget-grouping.html">basic</a> (v2.8; <span class="version updated">v2.25.5</span>).</li>
+				<li><a href="example-widget-grouping.html">basic</a> (v2.8; <span class="version updated">v2.26.1</span>).</li>
 				<li><a href="example-widget-grouping-filter-childrows.html">Grouping + filter + child rows</a> (<span class="updated version">v2.15.12</span>).</li>
 			</ul>
 		</li>
@@ -496,7 +497,7 @@
 		<li><a href="example-widget-print.html">Print widget</a> (<span class="version">v2.16.4</span>; <span class="version updated">v2.25.8</span>).</li>
 		<li><a href="example-widget-reflow.html">Reflow widget</a> (<span class="version">v2.16</span>; <span class="version updated">v2.19.0</span>).</li>
 		<li><a href="example-widgets.html">Repeat headers widget</a> (v2.0.5; <span class="version updated">v2.19.0</span>).</li>
-		<li><span class="results">&dagger;</span> <a href="example-widget-resizable.html">Resizable columns widget</a> (v2.0.23.1; <span class="version updated">v2.24.3</span>).</li>
+		<li><span class="results">&dagger;</span> <a href="example-widget-resizable.html">Resizable columns widget</a> (v2.0.23.1; <span class="version updated">v2.26.1</span>).</li>
 		<li><span class="results">&dagger;</span> <a href="example-widget-savesort.html">Save sort widget</a> (v2.0.27; <span class="version updated">v2.24.0</span>).</li>
 		<li><a href="example-widget-scroller.html">Scroller widget</a> (<span class="version">v2.9</span>; <span class="version updated">v2.25.9</span>).</li>
 		<li><span class="label label-info">Beta</span> <a href="example-widget-sort-to-hash.html">Sort-to-hash widget</a> (<span class="version">v2.22.4</span>; <span class="version updated">v2.24.4</span>).</li>
@@ -4747,7 +4748,7 @@ $('table').trigger('search', false);</pre></div>
 					<br>
 					This option has been replaced by the <a href="#widget-filter-external"><code>filter_external</code></a> option.<br>
 					<br>
-					Show any rows that match a search query. If this option is <code>true</code> any column match will show that row; but there are limitations (<span class="version">v2.13.3</span>).<br>
+					Show any rows that match a search query. If this option is <code>true</code> any column match will show that row; but <a href="example-widget-filter-any-match.html#limitations">there are limitations</a> (<span class="version">v2.13.3</span>).<br>
 					<br>
 					It is best if this <a href="#widget-filter-anymatch"><code>filter_anyMatch</code></a> option is used with a single search input as follows:
 					<pre class="prettyprint lang-html">&lt;input class=&quot;search&quot; type=&quot;search&quot;&gt;
@@ -7795,6 +7796,7 @@ $.tablesorter.addHeaderResizeEvent( table, true );</pre>
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.0.0-beta1.js"></script>
+<script src="js/jquery-migrate-1.4.1.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/prettify.js"></script>
 <script src="js/docs.js"></script>
